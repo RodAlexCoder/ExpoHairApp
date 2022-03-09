@@ -1,5 +1,5 @@
 import React , {useState, useEffect} from 'react'
-import { View, Text, SafeAreaView, StyleSheet, Button, TouchableOpacity, TextInput, ScrollView, Platform, ActivityIndicator} from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Button,RefreshControl, TouchableOpacity, TextInput, ScrollView, Platform, ActivityIndicator} from 'react-native'
 import SearchIcon from '../../assets/search.svg'
 import MyLocationIcon from '../../assets/my_location.svg'
 import {useNavigation} from '@react-navigation/native'
@@ -14,6 +14,7 @@ export default function Home() {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false)
   const [list , setList] = useState([])
+  const [refreshing, setRefreshing] = useState(false)
 
   const handleLocationFinder = async () => {
       setLocation(null)
@@ -59,9 +60,16 @@ export default function Home() {
     getBarbers()
   }, [])
 
+  const onRefresh = () => {
+    setRefreshing(false)
+    getBarbers()
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.Scroller}>
+      <ScrollView style={styles.Scroller} refreshControl={
+        <RefreshControl  refreshing={refreshing} onRefresh={onRefresh}/>
+      }>
         <View style={styles.HeaderArea}>
           <Text style={styles.headerTitle} numberOfLines={2}>Encontre o seu barbeiro favorito</Text>
 
