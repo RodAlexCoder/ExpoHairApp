@@ -157,6 +157,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: '10',
     alignItems: 'center',
     marginBottom: 15,
+    paddingLeft: 15
+
 },
 
 textInput: {
