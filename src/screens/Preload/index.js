@@ -14,8 +14,8 @@ export default function Preload() {
       const checkToken = async () => {
           const token = await AsyncStorage.getItem('token')
           if(token !== null){
-            let res = await api.checkToken(token)
-            if(res.token){
+            let json = await api.checkToken(token)
+            if(json.token){
 
           await AsyncStorage.setItem('token', json.token)
 
