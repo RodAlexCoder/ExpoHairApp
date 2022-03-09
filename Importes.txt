@@ -1,0 +1,25 @@
+--Estilo
+npm install styles-components
+
+-- Navegadores
+npm install @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+npm install @react-navigation/bottom-tabs
+
+
+-- Async Storage
+npm install @react-native-async-storage/async-storage
+
+--Location
+npm install @react-native-community/geolocation --save
+
+--Permissoes
+npm i react-native-permissions
+
+-- Swiper
+npm instal react-native-swiper
+
+--SVG 
+npm install react-native-SVG
+npm install react-native-svg-transformer
