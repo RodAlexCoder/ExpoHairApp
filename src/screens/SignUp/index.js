@@ -1,6 +1,8 @@
-import React , {useState}from 'react'
+import React , {useState, useContext}from 'react'
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import {UserContext} from '../../contexts/UserContext'
 
 
 import BarberLogo from '../../assets/BarberLogo.svg'
@@ -8,10 +10,12 @@ import SignInput from '../../components/SignInput'
 import EmailIcon from '../../assets/email.svg'
 import LockIcon from '../../assets/lock.svg'
 import PersonIcon from '../../assets/person.svg'
-
+import api from '../../api'
 
 
 export default function SignUp() {
+  const {dispatch: UserDispatch} =useContext(UserContext)
+
 
   const navigation = useNavigation()
 
@@ -27,8 +31,32 @@ export default function SignUp() {
       })
   }
 
-  const handleSignClick = () => {
+  const handleSignClick = async () => {
+    if(nameField !== '' && emailField !== '' && passwordField !== '') {
 
+      let json = await api.signUp(nameField , emailField, passwordField)
+      console.log(json)
+
+      if(json.token){
+        await AsyncStorage.setItem('token', json.token)
+
+        UserDispatch({
+          type: 'setAvatar',
+          payload: {
+            avatar: json.data.avatar
+          }
+        })
+
+        navigation.reset({
+          routes: [{ name: 'MainTab'}]
+        })
+      } else {
+        alert('Erro' + json.error)
+      }
+
+    } else {
+      alert('Preencha os campos corretamente')
+    }
   }
 
 
@@ -43,7 +71,7 @@ export default function SignUp() {
         placeholder='Digite sua nome'
         value={nameField}
         onChangeText={text => setNameField(text)}
-        password={true}
+        password={false}
         />
 
         <SignInput 

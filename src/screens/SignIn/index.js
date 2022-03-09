@@ -1,15 +1,18 @@
-import React , {useState}from 'react'
+import React , {useState, useContext}from 'react'
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import {UserContext} from '../../contexts/UserContext'
 
 import BarberLogo from '../../assets/BarberLogo.svg'
 import SignInput from '../../components/SignInput'
 import EmailIcon from '../../assets/email.svg'
 import LockIcon from '../../assets/lock.svg'
+import api from '../../api'
 
 
 export default function SignIn() {
+  const {dispatch: UserDispatch} =useContext(UserContext)
 
   const navigation = useNavigation()
 
@@ -24,8 +27,33 @@ export default function SignIn() {
       })
   }
 
-  const handleSignClick = () => {
+  const handleSignClick = async () => {
+      if(emailField !== '' && passwordField !== '') {
 
+        let json = await api.signIn(emailField, passwordField)
+        console.log(json)
+
+        if(json.token){
+          await AsyncStorage.setItem('token', json.token)
+
+          UserDispatch({
+            type: 'setAvatar',
+            payload: {
+              avatar: json.data.avatar
+            }
+          })
+
+          navigation.reset({
+            routes: [{ name: 'MainTab'}]
+          })
+
+        } else {
+          alert('Email ou senha errados!')
+        }
+
+      } else {
+        alert('Preencha os campos corretamente')
+      }
   }
 
 
