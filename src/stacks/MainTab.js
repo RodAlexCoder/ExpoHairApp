@@ -5,11 +5,12 @@ import Search from '../screens/Search'
 import Profile from '../screens/Profile'
 import Appointments from '../screens/Appointments'
 import Favorites from '../screens/Favorites'
+import CustomTabBar from "../components/CustomTabBar"
 
 const Tab = createBottomTabNavigator()
 
 export default () => (
-    <Tab.Navigator>
+    <Tab.Navigator tabBar={props => <CustomTabBar {...props}/>} screenOptions={{headerShown:false}}>
         <Tab.Screen name='Home' component={Home}/>
         <Tab.Screen name='Search' component={Search}/>
         <Tab.Screen name='Appointments' component={Appointments}/>

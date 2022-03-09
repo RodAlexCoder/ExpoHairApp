@@ -1,5 +1,5 @@
 import React , {useState, useContext}from 'react'
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity , TextInput} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {UserContext} from '../../contexts/UserContext'
@@ -66,30 +66,37 @@ export default function SignUp() {
 
       <View style={styles.inputArea}>
 
-      <SignInput 
-        IconSvg={PersonIcon}
-        placeholder='Digite sua nome'
-        value={nameField}
-        onChangeText={text => setNameField(text)}
-        password={false}
-        />
+      <View style={styles.InputArea}>
+          <PersonIcon width='24' height='24' fill='#268596'/>
+            <TextInput 
+            placeholder='Digite seu nome'
+            value={nameField}
+            onChangeText={text => setNameField(text)}
+            style={styles.textInput} 
+            />
+          </View>
 
-        <SignInput 
-        IconSvg={EmailIcon} 
-        placeholder='Digite seu email'
-        value={emailField}
-        onChangeText={text => setEmailField(text)}
-        password={false}
-        />
+      <View style={styles.InputArea}>
+          <EmailIcon width='24' height='24' fill='#268596'/>
+            <TextInput 
+            placeholder='Digite seu email'
+            value={emailField}
+            onChangeText={text => setEmailField(text)}
+            style={styles.textInput} 
+            />
+          </View>
+            
 
-        <SignInput 
-        IconSvg={LockIcon}
+      <View style={styles.InputArea}>
+        <LockIcon width='24' height='24' fill='#268596'/>
+       <TextInput 
         placeholder='Digite sua senha'
         value={passwordField}
         onChangeText={text => setPasswordField(text)}
-        password={true}
+        style={styles.textInput} 
+        secureTextEntry={true}
         />
-        
+      </View>      
 
           <TouchableOpacity style={styles.customButton} onPress={handleSignClick}>
             <Text style={styles.customButtonText}>CADASTRAR</Text>
@@ -151,5 +158,23 @@ const styles = StyleSheet.create({
     color: '#268596',
     fontWeight: 'bold',
     marginLeft: 5
-  }
+  },
+
+  InputArea: {
+    width: '100%',
+    height: 60,
+    backgroundColor: '#83d6e3',
+    flexDirection: 'row',
+    borderRadius: 30,
+    paddingHorizontal: '10',
+    alignItems: 'center',
+    marginBottom: 15,
+},
+
+textInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#268596',
+    marginLeft: 10
+}
 })
