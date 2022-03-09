@@ -1,18 +1,39 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
 import { View, Text , SafeAreaView, StyleSheet, ActivityIndicator} from 'react-native'
 import BarberLogo from '../../assets/BarberLogo.svg'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useNavigation} from '@react-navigation/native'
+import api from '../../api'
+import {UserContext} from '../../contexts/UserContext'
 
 export default function Preload() {
-
+  const {dispatch: UserDispatch} =useContext(UserContext)
   const navigation = useNavigation()
 
   useEffect(()=>{
       const checkToken = async () => {
           const token = await AsyncStorage.getItem('token')
           if(token !== null){
-            //Validar o token
+            let res = await api.checkToken(token)
+            if(res.token){
+
+          await AsyncStorage.setItem('token', json.token)
+
+          UserDispatch({
+            type: 'setAvatar',
+            payload: {
+              avatar: json.data.avatar
+            }
+          })
+
+          navigation.reset({
+            routes: [{ name: 'MainTab'}]
+          })
+
+            } else{
+              navigation.navigate('SignIn')
+            }
+
           }else{
             //Mandar pro login
             navigation.navigate('SignIn')
