@@ -47,7 +47,7 @@ export default function Home() {
         lng = location.longitude
       }
 
-      let res = await api.getBarbers(lat, lng)
+      let res = await api.getBarbers(lat, lng, locationText)
       if(res.error == ''){
 
         if(res.loc){
@@ -68,6 +68,11 @@ export default function Home() {
 
   const onRefresh = () => {
     setRefreshing(false)
+    getBarbers()
+  }
+
+  const handleLocationSearch = () => {
+    setLocation({})
     getBarbers()
   }
 
@@ -93,11 +98,12 @@ export default function Home() {
           
 
           <TextInput
-            placeholder='Onde você está'
+            placeholder= 'Aonde você está? '
             placeholderTextColor='#FFF'
             style={styles.textInput}
             value={locationText}
             onChangeText={ text => setLocationText(text)}
+            onEndEditing={handleLocationSearch}
           />
         </View>
 
