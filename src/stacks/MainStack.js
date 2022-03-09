@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Preload from '../Preload'
+import Preload from '../screens/Preload'
 
 const Stack = createNativeStackNavigator() 
 
