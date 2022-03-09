@@ -39,9 +39,15 @@ export default function Home() {
       setLoading(true)
       setList([])
 
-      let res = await api.getBarbers()
-      console.log(res)
+      let lat = null
+      let lng = null
 
+      if(location){
+        lat = location.latitude
+        lng = location.longitude
+      }
+
+      let res = await api.getBarbers(lat, lng)
       if(res.error == ''){
 
         if(res.loc){
