@@ -1,10 +1,23 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native'
 import Stars from './Stars'
+import {useNavigation} from '@react-navigation/native'
 
 export default function BarberItem({data}) {
+
+  const navigation = useNavigation()
+
+  const handleClick = () => {
+      navigation.navigate('Barber', {
+        id: data.id,
+        avatar: data.avatar,
+        name: data.name,
+        stars: data.stas
+      })
+  }
+
   return (
-    <TouchableOpacity style={styles.Area}>
+    <TouchableOpacity style={styles.Area} onPress={handleClick}>
 
       <Image source={{uri: data.avatar}} style={styles.Avatar}/>
 

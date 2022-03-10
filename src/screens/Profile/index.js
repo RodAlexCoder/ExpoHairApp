@@ -1,10 +1,22 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, Button, SafeAreaView} from 'react-native'
+import api from '../../api'
+import {useNavigation} from '@react-navigation/native'
 
 export default function Profile() {
+  const navigation = useNavigation()
+
+  const handleLogOut = async () => {
+    await api.logout()
+    navigation.reset({
+      routes: [{name: 'SignIn'}]
+    })
+  }
+
   return (
-    <View>
+    <SafeAreaView>
         <Text>Tela Profile</Text>
-    </View>
+        <Button title="Log Out" onPress={handleLogOut}/>
+    </SafeAreaView>
   )
 }

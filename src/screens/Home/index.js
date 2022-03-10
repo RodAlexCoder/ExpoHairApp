@@ -102,7 +102,7 @@ export default function Home() {
             placeholderTextColor='#FFF'
             style={styles.textInput}
             value={locationText}
-            onChangeText={ text => setLocationText(text)}
+            onChangeText={ (text) => setLocationText(text)}
             onEndEditing={handleLocationSearch}
           />
         </View>

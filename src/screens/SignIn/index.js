@@ -68,7 +68,7 @@ export default function SignIn() {
             <TextInput 
             placeholder='Digite seu email'
             value={emailField}
-            onChangeText={text => setEmailField(text)}
+            onChangeText={(text) => setEmailField(text)}
             style={styles.textInput} 
             />
           </View>
@@ -79,7 +79,7 @@ export default function SignIn() {
        <TextInput 
         placeholder='Digite sua senha'
         value={passwordField}
-        onChangeText={text => setPasswordField(text)}
+        onChangeText={(text) => setPasswordField(text)}
         style={styles.textInput} 
         secureTextEntry={true}
         />
