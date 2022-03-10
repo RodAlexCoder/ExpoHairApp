@@ -25,7 +25,7 @@ export default function Barber() {
 
   const [loading, setLoading] = useState(false)
   const [favorited, SetFavorited] = useState(false)
-  const [selectedService, SetSelectedService]  = useState(false)
+  const [selectedService, SetSelectedService]  = useState(null)
   const [showModal, setShowModal] = useState(false)
 
   useEffect(()=>{
@@ -37,6 +37,8 @@ export default function Barber() {
 
          setUserInfo(json.data)
          SetFavorited(json.data.favorited)
+
+         console.log(json.data.available)
 
         } else {
           alert('Error' + json.error)
@@ -118,7 +120,7 @@ export default function Barber() {
                               <Text style={styles.ServiceName}>{item.name}</Text>
                               <Text style={styles.ServicePrice}>R$: {item.price}</Text>
                           </View>
-                          <TouchableOpacity style={styles.ServiceChooseButton} onPress={() => {handleServiceChoose(key)}}>
+                          <TouchableOpacity style={styles.ServiceChooseButton} onPress={() => handleServiceChoose(key)}>
                                 <Text style={styles.ServiceChooseButtonText}>Agendar</Text>
                           </TouchableOpacity>
                       </View>
@@ -163,7 +165,7 @@ export default function Barber() {
           show={showModal}
           setShow={setShowModal}
           user={userInfo}
-          services={selectedService}
+          service={selectedService}
         />
     </SafeAreaView>
   )
