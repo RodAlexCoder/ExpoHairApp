@@ -36,19 +36,18 @@ export default function Barber() {
         if(json.error === ''){
 
          setUserInfo(json.data)
-         SetFavorited(json.data.favorited)
-
-         console.log(json.data.available)
+         SetFavorited(json.data.favorited)   
+   
 
         } else {
           alert('Error' + json.error)
         }
-        
+      
        setLoading(false)
       }
-
       getBarberInfo()
   }, [])
+
 
   const handleBackButton = () => {
     navigation.goBack()
