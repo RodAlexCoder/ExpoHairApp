@@ -112,13 +112,18 @@ export default function BarberModal({show, setShow, user, service}) {
     } 
 
     const handleFinishClick = async () => {
-        if(user.id && service != null && seletectYear > 0 && seletectMonth > 0 && seletectDay > 0 && seletectHour != null){
+        if(user.id && 
+        service != null && 
+        seletectYear > 0 && 
+        seletectMonth > 0 && 
+        seletectDay > 0 
+        && seletectHour != null){
             
-           /* let res = await api.setAppointment(
+            let res = await api.setAppointment(
                 user.id,
-                service, 
+                user.services[service].id, 
                 seletectYear,
-                seletectMonth,
+                seletectMonth +1 ,
                 seletectDay,
                 seletectHour
             )
@@ -126,16 +131,14 @@ export default function BarberModal({show, setShow, user, service}) {
                 setShow(false)
                 navigation.navigate('Appointments')
             }else {
-                alert('error: ' + res.error)
+                alert('Parou aqui ---- error: ' + res.error)
             }
             }else {
                 alert('Preencha todos os dados')
             }
-            */
-           setShow(false)
-           alert('AGENDADO!')
+
         }
-    }
+    
 
     const handleLeftDateClick = ( ) => {
         let monthDate = new Date(seletectYear, seletectMonth, 1)
