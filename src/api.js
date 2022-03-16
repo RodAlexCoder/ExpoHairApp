@@ -133,5 +133,13 @@ export default {
         const req = await fetch(`${BASE_API}/search?q=${barberName}&token=${token}`)
         const json = await req.json()
         return json
+    },
+
+    getFavorites: async () => {
+        const token = await AsyncStorage.getItem('token')
+
+        const req = await fetch(`${BASE_API}/user/favorites?&token=${token}`)
+        const json = await req.json()
+        return json
     }
 }

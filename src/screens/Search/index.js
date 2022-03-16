@@ -56,14 +56,14 @@ export default function Search() {
             <ActivityIndicator  style={styles.loadingIcon} 
             size='large' color= '#000000'/>}
 
-            {empty && <Text style={{textAlign: 'center', marginTop: 30, color: '#FFF', fontSize: 20}}>Não Encontrei barbeiros com o nome "{searchText}"</Text>}
+            {empty && <Text style={{textAlign: 'center', marginTop: 30, color: '#FFF', fontSize: 20}}>Não Encontrei barbeiros com o nome {searchText}</Text>}
 
             <View  style={styles.listArea} 
 >
                 {list.map((item, key) => (
                     <BarberItem key={key} data={item}/>
                 ))}
-            </View>
+            </View> 
         </ScrollView>
     </SafeAreaView>
   )
